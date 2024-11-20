@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.4.RELEASE</version>
+		<version>2.5.14.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -23,7 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<tomcat.port>9081</tomcat.port>
-	    <tomcat.ip>127.0.0.1</tomcat.ip>
+		<tomcat.ip>127.0.0.1</tomcat.ip>
 	    <file>readme</file>
 		<lombok.version>1.18.10</lombok.version>
 	</properties>
@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-jwt</artifactId>
-			<version>1.0.7.RELEASE</version>
+			<version>1.1.1.RELEASE</version>
 		</dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
         <dependency>
@@ -103,12 +103,12 @@
                     </execution>
                 </executions>
 			</plugin>
-			
+
 	         <plugin>
 		        <groupId>io.fabric8</groupId>
 		        <artifactId>docker-maven-plugin</artifactId>
 		        <extensions>true</extensions>
-		        
+
  		        <configuration>
 		          <images>
 			            <image>
@@ -123,10 +123,10 @@
 			              </build>
 			              <run>
 			              	<namingStrategy>alias</namingStrategy>
-			                <ports> 
+			                <ports>
 			                  <port>${tomcat.port}:8080</port>
 			                </ports>
-					         <wait> 
+					         <wait>
 					           <http>
 					              <url>http://${tomcat.ip}:${tomcat.port}/actuator/health</url>
 					           </http>
@@ -135,8 +135,8 @@
 			              </run>
 			            </image>
 		          </images>
-		        </configuration>	
-		        	
+		        </configuration>
+
 		      </plugin>
 
 			<plugin>
@@ -146,6 +146,19 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+						<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding -->
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>0.2.0</version>
+						</path>
+					</annotationProcessorPaths>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>

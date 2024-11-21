@@ -141,8 +141,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
-				<configuration>
+				<version>3.11.0</version>\n+				<configuration>
 					<source>17</source>
 					<target>17</target>
 					<annotationProcessorPaths>
@@ -153,6 +152,7 @@
 						</path>
 					</annotationProcessorPaths>
 					<release>17</release>
+			</plugin>
 			</plugin>
 		</plugins>
 	</build>

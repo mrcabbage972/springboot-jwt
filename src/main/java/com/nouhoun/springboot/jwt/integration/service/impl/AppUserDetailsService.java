@@ -24,10 +24,7 @@ public class AppUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(s);
-
-        if(user == null) {
-            throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
-        }
+        if (user == null) throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {

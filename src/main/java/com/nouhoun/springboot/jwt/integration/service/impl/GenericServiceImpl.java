@@ -17,22 +17,20 @@ import java.util.List;
 public class GenericServiceImpl implements GenericService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private RandomCityRepository randomCityRepository;
-
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
-    }
+        return userRepository.findByUsername(username);
 
-    @Override
     public List<User> findAllUsers() {
-        return (List<User>)userRepository.findAll();
+        return (List<User>) userRepository.findAll();
+    public List<User> findAllUsers() {
     }
-
-    @Override
     public List<RandomCity> findAllRandomCities() {
+        return (List<RandomCity>) randomCityRepository.findAll();
+    @Override
         return (List<RandomCity>)randomCityRepository.findAll();
     }
 }

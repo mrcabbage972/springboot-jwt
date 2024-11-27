@@ -14,16 +14,15 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.4.RELEASE</version>
+		<version>2.5.14.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<tomcat.port>9081</tomcat.port>
-	    <tomcat.ip>127.0.0.1</tomcat.ip>
 	    <file>readme</file>
 		<lombok.version>1.18.10</lombok.version>
 	</properties>
@@ -62,15 +61,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-jwt</artifactId>
-			<version>1.0.7.RELEASE</version>
-		</dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>2.1.0.RELEASE</version>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.5.2.RELEASE</version>
         </dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -124,11 +117,11 @@
 			              <run>
 			              	<namingStrategy>alias</namingStrategy>
 			                <ports> 
-			                  <port>${tomcat.port}:8080</port>
+			                  <port>9081:8080</port>
 			                </ports>
 					         <wait> 
 					           <http>
-					              <url>http://${tomcat.ip}:${tomcat.port}/actuator/health</url>
+					              <url>http://localhost:9081/actuator/health</url>
 					           </http>
 					           <time>90000</time>
 					         </wait>
@@ -139,22 +132,6 @@
 		        	
 		      </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>${lombok.version}</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 

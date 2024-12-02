@@ -26,13 +26,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Value("${security.signing-key}")
 	private String signingKey;
-
+29 |
 	@Value("${security.encoding-strength}")
 	private Integer encodingStrength;
-
+32 |
 	@Value("${security.security-realm}")
 	private String securityRealm;
-
+35 |
 	@Bean
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
@@ -40,10 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+46 |
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -56,20 +56,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		        .csrf()
 		        .disable();
 
-	}
-
-	@Bean
+    }
+60 |
+    @Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 		converter.setSigningKey(signingKey);
 		return converter;
 	}
-
-	@Bean
-	public TokenStore tokenStore() {
+67 |
+    @Bean
+    public TokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
 	}
-
+72 |
+    @Bean
 	@Bean
 	@Primary //Making this primary to avoid any accidental duplication with another token service instance of the same name
 	public DefaultTokenServices tokenServices() {

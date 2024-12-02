@@ -43,9 +43,7 @@ public class DatasourceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException{
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(ds);
-                .build();\n\n        return dataSource;\n    }\n\n    @Bean\n    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier(\"datasource\") DataSource ds) throws PropertyVetoException{\n-        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();\n+        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
         return entityManagerFactory;
     }
 

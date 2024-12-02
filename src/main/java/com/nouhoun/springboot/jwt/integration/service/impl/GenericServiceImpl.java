@@ -21,10 +21,8 @@ public class GenericServiceImpl implements GenericService {
     @Autowired
     private RandomCityRepository randomCityRepository;
 
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+   // public static void main(String[] args) {
+    //   Runtime.getRuntime().traceInstructions(true);
 
     @Override
     public List<User> findAllUsers() {

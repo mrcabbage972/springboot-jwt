@@ -46,4 +46,3 @@ public class User {
                     referencedColumnName = "id"))
     private List<Role> roles;
 }
-

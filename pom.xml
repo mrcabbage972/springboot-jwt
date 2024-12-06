@@ -146,6 +146,7 @@
 		        </configuration>	
 		        	
 		      </plugin>
+                <groupId>org.projectlombok</groupId>
 
                     <version>${lombok.version}</version>
                   </path>

@@ -26,7 +26,6 @@ import java.beans.PropertyVetoException;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.nouhoun.springboot.jwt.integration.repository")
 public class DatasourceConfig {
-
     @Bean
     public DataSource datasource() throws PropertyVetoException {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -35,7 +34,6 @@ public class DatasourceConfig {
                 .addScript("sql-scripts/schema.sql")
                 .addScript("sql-scripts/data.sql")
                 .build();
-
         return dataSource;
     }
 

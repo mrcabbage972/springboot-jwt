@@ -1,6 +1,5 @@
 package com.nouhoun.springboot.jwt.integration.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -25,15 +24,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Value("${security.signing-key}")
-	private String signingKey;
-
-	@Value("${security.encoding-strength}")
-	private Integer encodingStrength;
-
-	@Value("${security.security-realm}")
-	private String securityRealm;
-
-	@Bean
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
@@ -61,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setSigningKey(signingKey);
+		converter.setSigningKey("1234567890abcdef");
 		return converter;
 	}
 

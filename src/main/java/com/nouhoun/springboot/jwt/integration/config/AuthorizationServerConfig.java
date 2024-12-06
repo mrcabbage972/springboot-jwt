@@ -58,7 +58,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		configurer
 		        .inMemory()
 		        .withClient(clientId)
-				.secret(passwordEncoder.encode(clientSecret))
+				.secret(clientSecret)
 		        .authorizedGrantTypes(grantType)
 		        .scopes(scopeRead, scopeWrite)
 		        .resourceIds(resourceIds);

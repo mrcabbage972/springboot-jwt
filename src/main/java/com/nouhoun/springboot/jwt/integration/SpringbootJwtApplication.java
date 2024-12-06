@@ -1,3 +1,4 @@
+@@ -1,15 +1,15 @@
 package com.nouhoun.springboot.jwt.integration;
 
 import org.springframework.boot.SpringApplication;
@@ -9,4 +10,5 @@ public class SpringbootJwtApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootJwtApplication.class, args);
 	}
+
 }

@@ -74,4 +74,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		        .authenticationManager(authenticationManager);
 	}
 
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+		//Allowing custom token issuers
+		security.allowFormAuthenticationForClients()
+		.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+	}
 }

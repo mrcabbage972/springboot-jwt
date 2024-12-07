@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by nydiarra on 07/05/17.
+ *
  */
 @Service
 public class GenericServiceImpl implements GenericService {
@@ -28,11 +29,14 @@ public class GenericServiceImpl implements GenericService {
 
     @Override
     public List<User> findAllUsers() {
-        return (List<User>)userRepository.findAll();
+        if (userRepository.findAll() instanceof List<User>) {
+            return (List<User>) userRepository.findAll();
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @Override
     public List<RandomCity> findAllRandomCities() {
-        return (List<RandomCity>)randomCityRepository.findAll();
-    }
-}
+        return randomCityRepository.findAll() instanceof List<RandomCity> ? (List<RandomCity>) randomCityRepository.findAll() : new ArrayList<>();
+    }}

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 package com.nouhoun.springboot.jwt.integration.config;
 
 import org.springframework.beans.factory.annotation.Value;

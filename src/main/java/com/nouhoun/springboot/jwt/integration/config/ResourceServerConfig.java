@@ -26,9 +26,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
                 http
-                .requestMatchers()
-                .and()
                 .authorizeRequests()
+                .and()
                 .antMatchers("/actuator/**", "/api-docs/**").permitAll()
                 .antMatchers("/springjwt/**" ).authenticated();
     }

@@ -33,13 +33,11 @@ public class DatasourceConfig {
         EmbeddedDatabase dataSource = builder
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("sql-scripts/schema.sql")
+        try(EmbeddedDatabase dataSource = new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript("sql-scripts/schema.sql")
                 .addScript("sql-scripts/data.sql")
-                .build();
-
-        return dataSource;
-    }
-
-    @Bean
+                .build()) { return dataSource; }
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException{
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(ds);

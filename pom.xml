@@ -154,8 +154,8 @@
 				<version>3.13.0</version>
 				<configuration>
 					<source>1.8</source>
-					<target>1.8</target>
-					<annotationProcessorPaths>
+					<target>17</target>
+                    <annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>

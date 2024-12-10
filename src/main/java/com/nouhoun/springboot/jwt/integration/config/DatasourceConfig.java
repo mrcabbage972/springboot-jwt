@@ -19,10 +19,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.beans.PropertyVetoException;
+import java.util.Properties;
 
 /**
- * Created by nydiarra on 06/05/17.
+ * Created by nouhoun on 11/12/17.
  */
 @Configuration
 @EnableTransactionManagement
@@ -31,11 +31,11 @@ public class DatasourceConfig {
 
     @Bean
     public DataSource datasource() throws PropertyVetoException {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder()
         EmbeddedDatabase dataSource = builder
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("sql-scripts/schema.sql")
-                .addScript("sql-scripts/data.sql")
+                .addScript("sql-scripts/data.sql");
                 .build();
 
         return dataSource;
@@ -43,19 +43,23 @@ public class DatasourceConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException{
-        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean entityManagerFactory
+                = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(ds);
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactory.setPackagesToScan("com.nouhoun.springboot.jwt.integration.model");
-        Properties additionalProperties = new Properties();
-        additionalProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        additionalProperties.setProperty("hibernate.show_sql", "true");
-        additionalProperties.setProperty("hibernate.format_sql", "true");
-        entityManagerFactory.setJpaProperties(additionalProperties);
+        entityManagerFactory.setJpaProperties(additionalProperties());
+        entityManagerFactory.afterPropertiesSet();
     }
 
-        return entityManagerFactory;
+    @Bean
+    public Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
+        return properties;
     }
 
     @Bean

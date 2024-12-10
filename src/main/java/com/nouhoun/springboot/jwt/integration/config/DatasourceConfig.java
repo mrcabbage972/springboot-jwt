@@ -44,13 +44,15 @@ public class DatasourceConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException{
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-        DataSourceProperties dataSourceProperties = new DataSourceProperties();
-        dataSourceProperties.setUrl("jdbc:h2:mem:testdb");
-        dataSourceProperties.setUsername("sa");
-        dataSourceProperties.setPassword("");
-        return dataSourceProperties;
-    }\n
         entityManagerFactory.setDataSource(ds);
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+        entityManagerFactory.setPackagesToScan("com.nouhoun.springboot.jwt.integration.model");
+        Properties additionalProperties = new Properties();
+        additionalProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        additionalProperties.setProperty("hibernate.show_sql", "true");
+        additionalProperties.setProperty("hibernate.format_sql", "true");
+        entityManagerFactory.setJpaProperties(additionalProperties);
     }
 
         return entityManagerFactory;

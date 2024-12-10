@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 /**
@@ -29,8 +30,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "com.nouhoun.springboot.jwt.integration.repository")
 public class DatasourceConfig {
 
-    @Bean
-    public DataSource datasource() throws PropertyVetoException {
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder()
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder()
         EmbeddedDatabase dataSource = builder
                 .setType(EmbeddedDatabaseType.H2)
@@ -38,6 +38,7 @@ public class DatasourceConfig {
                 .addScript("sql-scripts/data.sql");
                 .build();
 
+        return dataSource;
         return dataSource;
     }
 

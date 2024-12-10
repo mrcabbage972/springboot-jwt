@@ -126,13 +126,13 @@
 			              </build>
 			              <run>
 			              	<namingStrategy>alias</namingStrategy>
-			                <ports> 
+			                <ports>
 			                  <port>${tomcat.port}:8080</port>
 			                </ports>
-					         <wait> 
+					         <wait>
 					           <http>
 					              <url>http://${tomcat.ip}:${tomcat.port}/actuator/health</url>
-					           </http>
+					            </http>
 					           <time>90000</time>
 					         </wait>
 			              </run>
@@ -140,9 +140,9 @@
 		          </images>
 		        </configuration>	
 		        	
-		      </plugin>
+		        </plugin>
 
-			<plugin>
+		        <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.13.0</version>

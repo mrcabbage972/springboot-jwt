@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
  * Created by nydiarra on 06/05/17.
  */
 @Configuration
+@EnableResourceServer
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
@@ -44,6 +45,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private TokenStore tokenStore;
 
+	@Bean
+	public TokenStore tokenStore() {
+		return new InMemoryTokenStore();
+	}
 	@Autowired
 	private JwtAccessTokenConverter accessTokenConverter;
 
@@ -53,22 +58,24 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Bean
+	public AuthenticationManager authenticationManager() throws Exception {
+		return super.authenticationManager();
+	}
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		configurer
-		        .inMemory()
-		        .withClient(clientId)
-				.secret(passwordEncoder.encode(clientSecret))
-		        .authorizedGrantTypes(grantType)
-		        .scopes(scopeRead, scopeWrite)
-		        .resourceIds(resourceIds);
+				.withClientDetails(clientDetailsService);
+		//.inMemory()
+		//.withClient(clientId)
+		//		.secret(passwordEncoder.encode(clientSecret))
+		//		.authorizedGrantTypes(grantType)
+		//		.scopes(scopeRead, scopeWrite)
+		//		.resourceIds(resourceIds);
 	}
-
 	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
-		endpoints.tokenStore(tokenStore)
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception{
+		endpoints.tokenStore(tokenStore())
 		        .accessTokenConverter(accessTokenConverter)
 		        .tokenEnhancer(enhancerChain)
 		        .authenticationManager(authenticationManager);

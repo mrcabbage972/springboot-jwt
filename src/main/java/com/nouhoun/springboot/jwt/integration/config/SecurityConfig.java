@@ -67,6 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public TokenStore tokenStore() {
+		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+		converter.setSigningKey(signingKey);
 		return new JwtTokenStore(accessTokenConverter());
 	}
 

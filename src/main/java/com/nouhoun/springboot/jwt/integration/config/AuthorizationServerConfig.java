@@ -11,15 +11,21 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.context.annotation.Bean;
+
+import com.nouhoun.springboot.jwt.integration.config.CustomUserDetailsService;
 
 /**
  * Created by nydiarra on 06/05/17.
  */
 @Configuration
-@EnableAuthorizationServer
+
+
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Value("${security.jwt.client-id}")
@@ -40,6 +46,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Value("${security.jwt.resource-ids}")
 	private String resourceIds;
 
+
+
+	@Autowired
+	private CustomUserDetailsService userDetailsService;
+
 	@Autowired
 	private TokenStore tokenStore;
 
@@ -50,27 +61,41 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		configurer
 		        .inMemory()
-		        .withClient(clientId)
-				.secret(passwordEncoder.encode(clientSecret))
+				.withClient(clientId)
+ 				.secret(passwordEncoder.encode(clientSecret))
 		        .authorizedGrantTypes(grantType)
-		        .scopes(scopeRead, scopeWrite)
-		        .resourceIds(resourceIds);
+				.scopes(scopeRead, scopeWrite)
+				.resourceIds(resourceIds);
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
+		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter(), jwtAccessTokenConverter()));
 		endpoints.tokenStore(tokenStore)
-		        .accessTokenConverter(accessTokenConverter)
+		        .accessTokenConverter(jwtAccessTokenConverter())
 		        .tokenEnhancer(enhancerChain)
-		        .authenticationManager(authenticationManager);
+				.userDetailsService(userDetailsService)
+		        .authenticationManager(authenticationManager())
+		        .pathMapping("/oauth/token", "/api/oauth/token");
 	}
 
-}
 
-@Bean
-public DefaultAccessTokenConverter accessTokenConverter() {
+// @Override
+// public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+// 	security.tokenKeyAccess("isAuthenticated()")
+// 	        .checkTokenAccess("isAuthenticated()");
+// }
+
+// @Bean
+// public AuthenticationManager authenticationManager() {
+// 	return new AuthenticationManager();
+// }
+	@Bean
+	public JwtAccessTokenConverter jwtAccessTokenConverter() {
+		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+		converter.setSigningKey("my-secret-key");
+		return converter;
 	DefaultAccessTokenConverter converter = new DefaultAccessTokenConverter();
 	converter.setUserTokenConverter(new UserAuthenticationConverter());
 	return converter;

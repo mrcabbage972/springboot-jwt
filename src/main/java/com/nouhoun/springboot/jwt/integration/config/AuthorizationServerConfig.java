@@ -1,6 +1,7 @@
 package com.nouhoun.springboot.jwt.integration.config;
 
 import java.util.Arrays;
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConv
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.context.annotation.Bean;
 
@@ -22,7 +24,7 @@ import com.nouhoun.springboot.jwt.integration.config.CustomUserDetailsService;
 
 /**
  * Created by nydiarra on 06/05/17.
- */
+ * <p>
 @Configuration
 
 
@@ -32,9 +34,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private String clientId;
 
 	@Value("${security.jwt.client-secret}")
-	private String clientSecret;
+	private String clientSecret = "password";
 
 	@Value("${security.jwt.grant-type}")
+	private String grantType = "password";
 	private String grantType;
 
 	@Value("${security.jwt.scope-read}")
@@ -52,6 +55,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private CustomUserDetailsService userDetailsService;
 
 	@Autowired
+	private AuthenticationManager authenticationManager;
+
+	@Autowired
 	private TokenStore tokenStore;
 
 	@Autowired
@@ -64,14 +70,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				.withClient(clientId)
  				.secret(passwordEncoder.encode(clientSecret))
 		        .authorizedGrantTypes(grantType)
-				.scopes(scopeRead, scopeWrite)
-				.resourceIds(resourceIds);
+				.scopes(scopeRead, scopeWrite);
+// 				.resourceIds(resourceIds);
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter(), jwtAccessTokenConverter()));
 		endpoints.tokenStore(tokenStore)
 		        .accessTokenConverter(jwtAccessTokenConverter())
 		        .tokenEnhancer(enhancerChain)
@@ -94,9 +99,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter jwtAccessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setSigningKey("my-secret-key");
+		converter.setSigningKey("1234567890abcdef");
 		return converter;
 	DefaultAccessTokenConverter converter = new DefaultAccessTokenConverter();
 	converter.setUserTokenConverter(new UserAuthenticationConverter());
 	return converter;
-}
+	}

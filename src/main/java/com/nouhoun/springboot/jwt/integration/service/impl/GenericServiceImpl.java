@@ -28,11 +28,11 @@ public class GenericServiceImpl implements GenericService {
 
     @Override
     public List<User> findAllUsers() {
-        return (List<User>)userRepository.findAll();
+        return userRepository.findAll() instanceof List ? (List<User>) userRepository.findAll() : null;
     }
 
     @Override
     public List<RandomCity> findAllRandomCities() {
-        return (List<RandomCity>)randomCityRepository.findAll();
+        return randomCityRepository.findAll() instanceof List ? (List<RandomCity>) randomCityRepository.findAll() : null;
     }
 }

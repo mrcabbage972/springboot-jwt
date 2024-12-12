@@ -1,7 +1,6 @@
 package com.nouhoun.springboot.jwt.integration.config;
 
 import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -45,12 +44,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private TokenStore tokenStore;
 
 	@Autowired
-	private JwtAccessTokenConverter accessTokenConverter;
-
-	@Autowired
-	private AuthenticationManager authenticationManager;
-
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Override
@@ -74,4 +67,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		        .authenticationManager(authenticationManager);
 	}
 
+}
+
+@Bean
+public DefaultAccessTokenConverter accessTokenConverter() {
+	DefaultAccessTokenConverter converter = new DefaultAccessTokenConverter();
+	converter.setUserTokenConverter(new UserAuthenticationConverter());
+	return converter;
 }

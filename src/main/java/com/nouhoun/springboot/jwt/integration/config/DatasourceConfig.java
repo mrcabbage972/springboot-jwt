@@ -33,15 +33,16 @@ public class DatasourceConfig {
     @Bean
     public DataSource dataSource(DataSourceProperties dataSourceProperties) throws PropertyVetoException {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException {
+        return dataSourceProperties.initializeDataSourceBuilder().build();
+    }
+
     @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException {
         entityManagerFactoryBean.setDataSource(ds);
         entityManagerFactoryBean.setPackagesToScan(new String[] { "com.nouhoun.springboot.jwt.integration.model" });
-        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        entityManagerFactoryBean.setPackagesToScan(new String[] {"com.nouhoun.springboot.jwt.integration.domain"});
         entityManagerFactoryBean.setJpaProperties(additionalProperties());
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
-        return entityManagerFactory;
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) throws PropertyVetoException {
-    @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);

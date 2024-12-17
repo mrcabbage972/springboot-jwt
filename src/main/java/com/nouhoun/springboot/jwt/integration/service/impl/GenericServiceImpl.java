@@ -34,5 +34,9 @@ public class GenericServiceImpl implements GenericService {
     @Override
     public List<RandomCity> findAllRandomCities() {
         return (List<RandomCity>)randomCityRepository.findAll();
+    public List<RandomCity> findAllRandomCities() {
+        return (List<RandomCity>) randomCityRepository.findAll();
+    }
+}
     }
 }

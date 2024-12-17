@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import java.util.List;
 
-/**
+/*
  * Created by nydiarra on 06/05/17.
  */
 @Entity
@@ -47,3 +46,9 @@ public class User {
     private List<Role> roles;
 }
 
+@Entity
+@Table(name = "user_role")
+public class UserRole implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;

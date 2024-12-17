@@ -25,8 +25,9 @@ public class User {
 
     @Column(name = "password")
     @JsonIgnore
-    private String password;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     @Column(name = "first_name")
     private String firstName;
 

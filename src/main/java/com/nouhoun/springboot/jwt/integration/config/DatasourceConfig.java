@@ -29,11 +29,11 @@ public class DatasourceConfig {
 
     @Bean
     public DataSource datasource() throws PropertyVetoException {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase dataSource = builder
+        EmbeddedDatabase dataSource = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("sql-scripts/schema.sql")
                 .addScript("sql-scripts/data.sql")
+                .build();
                 .build();
 
         return dataSource;

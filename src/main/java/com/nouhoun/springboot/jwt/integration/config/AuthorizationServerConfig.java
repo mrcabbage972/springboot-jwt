@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-
+import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 /**
  * Created by nydiarra on 06/05/17.
  */
@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Value("${security.jwt.client-id}")
-	private String clientId;
+	private AuthorizationServerConfigurerAdapter authorizationServerConfigurerAdapter;
 
 	@Value("${security.jwt.client-secret}")
 	private String clientSecret;

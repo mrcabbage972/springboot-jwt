@@ -1,6 +1,8 @@
 package com.nouhoun.springboot.jwt.integration.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -17,6 +19,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
+ *
  * Created by nydiarra on 06/05/17.
  */
 @Configuration
@@ -49,12 +52,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		        .sessionManagement()
 		        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		        .and()
 		        .httpBasic()
 		        .realmName(securityRealm)
 		        .and()
 		        .csrf()
-		        .disable();
+		        .disable()
+		        .authorizeRequests()
+		        .antMatchers("/oauth/token", "/oauth/check_token", "/oauth/confirm_access", "/oauth/authorize", "/oauth/error", "/oauth/token_key",
+		                "/oauth/userinfo", "/oauth/token_key").permitAll()
+		        .anyRequest().authenticated()
+//				.and()
+//				.exceptionHandling()
+//				.authenticationEntryPoint(restAuthenticationEntryPoint)
+//				.accessDeniedHandler(customAccessDeniedHandler)
+		        .and()
+		        .apply(new SpringSecurityOAuth2BearerTokenSuccessHandler())
+		        .and()
+		        .apply(new Http401UnauthorizedEntryPoint());
 
 	}
 
@@ -69,6 +85,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public TokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
 	}
+
+	@Bean
+	public JwtTokenStore jwtTokenStore() {
+		return new JwtTokenStore(accessTokenConverter());
+	}
+
+
 
 	@Bean
 	@Primary //Making this primary to avoid any accidental duplication with another token service instance of the same name

@@ -1,6 +1,7 @@
 package com.nouhoun.springboot.jwt.integration.config;
 
 import java.util.Arrays;
+import java.security.cert.X509Certificate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

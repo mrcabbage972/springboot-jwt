@@ -155,7 +155,7 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<annotationProcessorPaths>
+					<annotationProcessorPath>
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>

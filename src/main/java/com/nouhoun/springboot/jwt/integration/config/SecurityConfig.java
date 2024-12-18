@@ -43,13 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		        .sessionManagement()
-		        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		        .and()
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
 		        .httpBasic()
 		        .realmName(securityRealm)
 		        .and()
@@ -57,7 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		        .disable();
 
 	}
-
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
@@ -70,12 +68,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new JwtTokenStore(accessTokenConverter());
 	}
 
-	@Bean
-	@Primary //Making this primary to avoid any accidental duplication with another token service instance of the same name
-	public DefaultTokenServices tokenServices() {
-		DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-		defaultTokenServices.setTokenStore(tokenStore());
-		defaultTokenServices.setSupportRefreshToken(true);
-		return defaultTokenServices;
-	}
+	  @Bean
+	  @Primary // Making this primary to avoid any accidental duplication with another token service instance of the same name
+	  public DefaultTokenServices tokenServices() {
+	    DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+	    defaultTokenServices.setTokenStore(tokenStore());
+	    defaultTokenServices.setSupportRefreshToken(true);
+	    return defaultTokenServices;
+	  }
 }

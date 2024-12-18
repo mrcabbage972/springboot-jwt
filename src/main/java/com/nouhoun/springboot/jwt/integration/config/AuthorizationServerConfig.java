@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 /**
  * Created by nydiarra on 06/05/17.
  */
@@ -45,7 +45,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private TokenStore tokenStore;
 
 	@Autowired
-	private JwtAccessTokenConverter accessTokenConverter;
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -53,10 +53,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Override
-	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
-		configurer
-		        .inMemory()
 		        .withClient(clientId)
 				.secret(passwordEncoder.encode(clientSecret))
 		        .authorizedGrantTypes(grantType)

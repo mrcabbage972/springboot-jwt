@@ -29,6 +29,7 @@ public class AppUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
         }
 
+            throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
         List<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
             authorities.add(new SimpleGrantedAuthority(role.getRoleName()));

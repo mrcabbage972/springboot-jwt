@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
 @EnableWebSecurity
@@ -43,16 +44,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		        .sessionManagement()
-		        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		        .and()
-		        .httpBasic()
-		        .realmName(securityRealm)
-		        .and()
-		        .csrf()
-		        .disable();
-
-	}
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+			.httpBasic()
+			.realmName(securityRealm)
+			.and()
+			.csrf()
+			.disable()
+			.authorizeRequests()
+			.antMatchers("/token/**").permitAll()
+			.anyRequest()
+			.authenticated()
+			.and()
+			.addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {

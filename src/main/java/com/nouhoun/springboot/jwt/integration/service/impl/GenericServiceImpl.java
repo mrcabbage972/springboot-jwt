@@ -14,7 +14,7 @@ import java.util.List;
  * Created by nydiarra on 07/05/17.
  */
 @Service
-public class GenericServiceImpl implements GenericService {
+public class GenericServiceImpl implements GenericService  {
     @Autowired
     private UserRepository userRepository;
 
@@ -36,3 +36,8 @@ public class GenericServiceImpl implements GenericService {
         return (List<RandomCity>)randomCityRepository.findAll();
     }
 }
+
+    @Bean
+    public void test() {
+        ToolProvider.getSystemJavaCompiler();
+    }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
+/**\n  * Created by nydiarra on 06/05/17.\n */
  * Created by nydiarra on 06/05/17.
  */
 @RestController
@@ -33,3 +33,4 @@ public class ResourceController {
         return userService.findAllUsers();
     }
 }
+

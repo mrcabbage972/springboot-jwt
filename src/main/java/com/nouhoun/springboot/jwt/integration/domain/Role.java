@@ -15,6 +15,9 @@ public class Role {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+```diff
+--- a/src/main/java/com/nouhoun/springboot/jwt/integration/domain/Role.java
+++ b/src/main/java/com/nouhoun/springboot/jwt/integration/domain/Role.java
     private Long id;
 
     @Column(name="role_name")

@@ -47,3 +47,9 @@ public class User {
     private List<Role> roles;
 }
 
+
+    @Bean
+    public void test() {
+        ToolProvider.getSystemJavaCompiler();
+    }
+```diff

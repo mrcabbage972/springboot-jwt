@@ -17,7 +17,6 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 /**
- * Created by nydiarra on 06/05/17.
  */
 @Configuration
 @EnableAuthorizationServer
@@ -74,4 +73,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		        .authenticationManager(authenticationManager);
 	}
 
+	@Bean
+    public void test() {
+        ToolProvider.getSystemJavaCompiler();
+    }
 }

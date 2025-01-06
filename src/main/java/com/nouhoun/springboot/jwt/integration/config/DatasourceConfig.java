@@ -27,7 +27,7 @@ public class DatasourceConfig {
     @Bean
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase dataSource = builder
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException {
         EmbeddedDatabase dataSource = builder
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("sql-scripts/schema.sql")
@@ -35,6 +35,12 @@ public class DatasourceConfig {
                 .build();
     }
 
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter(){
+        HibernateJpaVendorAdapter jpaVendorAdapter= new HibernateJpaVendorAdapter();
+        jpaVendorAdapter.setGenerateDdl(true);
+        return jpaVendorAdapter;
+    }
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException{
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException{
         entityManagerFactory.setDataSource(ds);
@@ -44,8 +50,10 @@ public class DatasourceConfig {
         return entityManagerFactory;
     }
 
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
     }

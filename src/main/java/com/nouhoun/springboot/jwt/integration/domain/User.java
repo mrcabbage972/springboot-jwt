@@ -26,7 +26,6 @@ import java.util.List;
     private String firstName;
 
     @Column(name = "password")
-    @JsonIgnore
     private String password;
 
     @Column(name = "first_name")
@@ -34,11 +33,8 @@ import java.util.List;
 
     @Column(name = "last_name")
     @NotBlank
-    @Size(min = 3, max = 50)
-    private String lastName;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
 }

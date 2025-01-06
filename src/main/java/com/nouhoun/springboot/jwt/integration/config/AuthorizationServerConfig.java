@@ -74,4 +74,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		        .authenticationManager(authenticationManager);
 	}
 
+	private JwtAccessTokenConverter accessTokenConverter() {
+		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+		converter.setSigningKey("nouhoun");
+		return converter;
+	}
+
+
 }

@@ -15,4 +15,8 @@ public class Role {
 
     @Column(name = "NAME")
     private String name;
+
+    public String getRoleName() {
+        return name;
+    }
 }

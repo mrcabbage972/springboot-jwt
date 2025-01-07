@@ -15,7 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.sql.DataSource;
+import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
 @Configuration

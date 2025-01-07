@@ -21,7 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>18</java.version>
+		<java.version>21</java.version>
 		<tomcat.port>9081</tomcat.port>
 	    <tomcat.ip>127.0.0.1</tomcat.ip>
 	    <file>readme</file>
@@ -50,12 +50,9 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-authorization-server</artifactId>
+			<version>1.1.0</version>
 		</dependency>
 
 
@@ -110,49 +107,14 @@
                     </execution>
                 </executions>
 			</plugin>
-			
-	         <plugin>
-		        <groupId>io.fabric8</groupId>
-		        <artifactId>docker-maven-plugin</artifactId>
-		        <extensions>true</extensions>
-		        <version>0.26.1</version>
- 		        <configuration>
-		          <images>
-			            <image>
-			              <name>springboot-jwt</name>
-			              <alias>springboot-jwt</alias>
-			              <build>
-			                <filter>@</filter>
-			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
-			                <assembly>
-			                  <descriptorRef>artifact</descriptorRef>
-			                </assembly>
-			              </build>
-			              <run>
-			              	<namingStrategy>alias</namingStrategy>
-			                <ports> 
-			                  <port>${tomcat.port}:8080</port>
-			                </ports>
-					         <wait> 
-					           <http>
-					              <url>http://${tomcat.ip}:${tomcat.port}/actuator/health</url>
-					           </http>
-					           <time>90000</time>
-					         </wait>
-			              </run>
-			            </image>
-		          </images>
-		        </configuration>	
-		        	
-		      </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
-					<source>18</source>
-					<target>18</target>
+					<source>21</source>
+					<target>21</target>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>

@@ -1,22 +1,18 @@
 package com.nouhoun.springboot.jwt.integration.domain;
 
-import javax.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
 
-/**
- * Created by nydiarra on 10/05/17.
- */
+@Data
 @Entity
-@Table(name = "random_city")
-@Getter
-@Setter
+@Table(name = "CITY")
 public class RandomCity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 }

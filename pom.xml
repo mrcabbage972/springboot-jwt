@@ -89,6 +89,12 @@
     </dependencies>
 
     <build>
+        <pluginRepositories>
+            <pluginRepository>
+                <id>projectlombok.org</id>
+                <url>https://projectlombok.org/mavenrepo</url>
+            </pluginRepository>
+        </pluginRepositories>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

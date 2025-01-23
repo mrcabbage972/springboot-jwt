@@ -1,11 +1,11 @@
 CREATE TABLE random_city (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
+  id bigint(20) NOT NULL IDENTITY,
   name varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE app_role (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
+  id bigint(20) NOT NULL IDENTITY,
   description varchar(255) DEFAULT NULL,
   role_name varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
@@ -13,7 +13,7 @@ CREATE TABLE app_role (
 
 
 CREATE TABLE app_user (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
+  id bigint(20) NOT NULL IDENTITY,
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
   password varchar(255) NOT NULL,

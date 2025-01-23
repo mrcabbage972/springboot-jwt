@@ -22,6 +22,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<tomcat.port>9081</tomcat.port>
 	    <tomcat.ip>127.0.0.1</tomcat.ip>
 	    <file>readme</file>
@@ -95,6 +97,7 @@
                 <configuration>
                     <executable>true</executable>
 					<addResources>true</addResources>
+					<javaVersion>17</javaVersion>
                 </configuration>
                 <executions>
                     <execution>

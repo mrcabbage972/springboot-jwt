@@ -86,15 +86,14 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-maven-plugin</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <pluginRepositories>
-            <pluginRepository>
-                <id>projectlombok.org</id>
-                <url>https://projectlombok.org/mavenrepo</url>
-            </pluginRepository>
-        </pluginRepositories>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

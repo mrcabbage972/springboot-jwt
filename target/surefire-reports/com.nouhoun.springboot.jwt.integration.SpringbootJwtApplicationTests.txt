@@ -1,9 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.nouhoun.springboot.jwt.integration.SpringbootJwtApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 10.2 s <<< FAILURE! - in com.nouhoun.springboot.jwt.integration.SpringbootJwtApplicationTests
-contextLoads  Time elapsed: 0.007 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'resourceServerConfig': Unsatisfied dependency expressed through field 'tokenServices'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.security.oauth2.provider.token.ResourceServerTokenServices' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.security.oauth2.provider.token.ResourceServerTokenServices' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.726 s - in com.nouhoun.springboot.jwt.integration.SpringbootJwtApplicationTests

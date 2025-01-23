@@ -15,3 +15,23 @@ Unexpected IOException with stream: 2025-01-23 17:50:13.844  INFO 1139 --- [    
 Unexpected IOException with stream: 2025-01-23 17:50:13.931  INFO 1139 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@702e21c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5c450960, org.springframework.security.web.context.SecurityContextPersistenceFilter@3c20abd6, org.springframework.security.web.header.HeaderWriterFilter@375682a5, org.springframework.security.web.csrf.CsrfFilter@2fb40e49, org.springframework.security.web.authentication.logout.LogoutFilter@509e0253, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4bc49d70, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@1509bd56, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@7c5fbde4, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6b6cf3c1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7cd2d3b6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7f922523, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7021bb55, org.springframework.security.web.session.SessionManagementFilter@79827e71, org.springframework.security.web.access.ExceptionTranslationFilter@381f05a9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5dcec8e9]
 
 
+# Created at 2025-01-23T17:50:16.650
+Unexpected IOException with stream: 2025-01-23 17:50:16.649  INFO 1139 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+
+
+# Created at 2025-01-23T17:50:16.840
+Unexpected IOException with stream: 2025-01-23 17:50:16.839  INFO 1139 --- [           main] c.n.s.j.i.SpringbootJwtApplicationTests  : Started SpringbootJwtApplicationTests in 14.821 seconds (JVM running for 18.026)
+
+
+# Created at 2025-01-23T17:50:17.048
+Unexpected IOException: 5,1,com.nouhoun.springboot.jwt.integration.SpringbootJwtApplicationTests,contextLoads,null,null,null
+
+
+# Created at 2025-01-23T17:50:17.536
+Unexpected IOException: 6,1,com.nouhoun.springboot.jwt.integration.SpringbootJwtApplicationTests,contextLoads,null,null,null
+
+
+# Created at 2025-01-23T17:50:17.538
+Unexpected IOException: 2,1,org.apache.maven.surefire.junitplatform.JUnitPlatformProvider,com.nouhoun.springboot.jwt.integration.SpringbootJwtApplicationTests,null,null,null
+
+

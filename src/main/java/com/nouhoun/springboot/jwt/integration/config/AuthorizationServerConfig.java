@@ -68,10 +68,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 
 	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints, TokenStore tokenStore) throws Exception {
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
 		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
-		endpoints.tokenStore(tokenStore)
+		endpoints.tokenStore(tokenStore())
 		        .accessTokenConverter(accessTokenConverter)
 		        .tokenEnhancer(enhancerChain)
 		        .authenticationManager(authenticationManager);

@@ -1,0 +1,17 @@
+# Created at 2025-01-23T17:50:13.813
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: null
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:386)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+
+# Created at 2025-01-23T17:50:13.845
+Unexpected IOException with stream: 2025-01-23 17:50:13.844  INFO 1139 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfiguration$NotOAuthRequestMatcher@407ff25f with [org.springframework.security.web.session.DisableEncodeUrlFilter@3ba8fbc8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@113a89c5, org.springframework.security.web.context.SecurityContextPersistenceFilter@1bd5b1c8, org.springframework.security.web.header.HeaderWriterFilter@2f403d0a, org.springframework.security.web.authentication.logout.LogoutFilter@7828bc6b, org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter@21d561c9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@569026df, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7896e96a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@55da6bf, org.springframework.security.web.session.SessionManagementFilter@186fc6e, org.springframework.security.web.access.ExceptionTranslationFilter@15ab0461, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2ac7c683]
+
+
+# Created at 2025-01-23T17:50:13.931
+Unexpected IOException with stream: 2025-01-23 17:50:13.931  INFO 1139 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@702e21c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5c450960, org.springframework.security.web.context.SecurityContextPersistenceFilter@3c20abd6, org.springframework.security.web.header.HeaderWriterFilter@375682a5, org.springframework.security.web.csrf.CsrfFilter@2fb40e49, org.springframework.security.web.authentication.logout.LogoutFilter@509e0253, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4bc49d70, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@1509bd56, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@7c5fbde4, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6b6cf3c1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7cd2d3b6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7f922523, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7021bb55, org.springframework.security.web.session.SessionManagementFilter@79827e71, org.springframework.security.web.access.ExceptionTranslationFilter@381f05a9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5dcec8e9]
+
+

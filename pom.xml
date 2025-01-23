@@ -169,6 +169,12 @@
                 </executions>
             </plugin>
 		</plugins>
+		<pluginRepositories>
+			<pluginRepository>
+				<id>projectlombok.org</id>
+				<url>https://projectlombok.org/mavenrepo</url>
+			</pluginRepository>
+		</pluginRepositories>
 	</build>
 
 </project>

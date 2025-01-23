@@ -25,7 +25,7 @@
 		<tomcat.port>9081</tomcat.port>
 	    <tomcat.ip>127.0.0.1</tomcat.ip>
 	    <file>readme</file>
-		<lombok.version>1.18.10</lombok.version>
+		<lombok.version>1.18.28</lombok.version>
 	</properties>
 
 	<dependencies>
@@ -155,6 +155,19 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+                <version>${lombok.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>delombok</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 

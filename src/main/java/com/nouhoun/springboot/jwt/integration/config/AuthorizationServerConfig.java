@@ -43,9 +43,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private String resourceIds;
 
 	@Autowired
-	private TokenStore tokenStore;
-
-	@Autowired
 	private JwtAccessTokenConverter accessTokenConverter;
 
 	@Autowired
@@ -71,7 +68,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 
 	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints, TokenStore tokenStore) throws Exception {
 		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
 		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
 		endpoints.tokenStore(tokenStore)

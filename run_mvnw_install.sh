@@ -1,0 +1,1 @@
+bash run_chmod.sh && ./mvnw install

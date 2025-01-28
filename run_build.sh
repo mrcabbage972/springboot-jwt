@@ -1,1 +1,1 @@
-#!/bin/bash\nchmod +x build_image.sh\n./build_image.sh
+#!/bin/bash\nchmod +x build.sh\n./build.sh

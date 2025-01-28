@@ -1,0 +1,1 @@
+#!/bin/bash\nchmod +x docker_build.sh\n./docker_build.sh

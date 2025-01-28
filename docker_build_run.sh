@@ -1,0 +1,1 @@
+#!/bin/bash\ndocker build -t springboot-jwt-jdk17 .

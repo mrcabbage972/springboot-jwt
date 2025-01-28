@@ -1,0 +1,1 @@
+#!/bin/bash\nchmod +x run_and_cd.sh\n./run_and_cd.sh\ncat pom.xml

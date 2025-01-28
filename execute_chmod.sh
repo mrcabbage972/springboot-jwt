@@ -1,0 +1,1 @@
+bash mvnw_executable.sh

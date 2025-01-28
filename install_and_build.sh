@@ -1,0 +1,1 @@
+chmod +x mvnw && ./mvnw install

@@ -1,0 +1,1 @@
+bash execute_chmod.sh

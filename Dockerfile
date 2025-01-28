@@ -2,7 +2,8 @@ FROM maven:3.8.1-openjdk-17-slim AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-RUN mvn dependency:go-offline
+RUN mvn dependency:go-offline -B
+RUN mvn install -DskipTests
 
 FROM openjdk:17-jdk-slim
 WORKDIR /app

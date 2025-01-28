@@ -1,1 +1,1 @@
-#!/bin/bash\ndocker build -t springboot-jwt-jdk17 .
+#!/bin/bash\nchmod +x docker_build.sh\n./docker_build.sh

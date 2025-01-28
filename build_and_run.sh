@@ -1,0 +1,1 @@
+#!/bin/bash\nchmod +x build.sh\n./build.sh

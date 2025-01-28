@@ -1,1 +1,1 @@
-#!/bin/bash\nchmod +x run.sh\n./run.sh
+#!/bin/bash\nchmod +x execute.sh\n./execute.sh

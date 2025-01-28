@@ -1,1 +1,1 @@
-#!/bin/bash\n\ndocker build -t springboot-jwt .\n\ndocker run -it --rm springboot-jwt mvn test
+#!/bin/bash\n\nchmod +x docker_build_run.sh\n./docker_build_run.sh

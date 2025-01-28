@@ -201,6 +201,11 @@ if [ -z "$BASE_DIR" ]; then
 fi
 
 export MAVEN_PROJECTBASEDIR=${MAVEN_BASEDIR:-"$BASE_DIR"}
+
+if [ ! -f "$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar" ]; then
+  "$BASH_SOURCE[0]" wrapper:wrapper
+fi
+
 echo $MAVEN_PROJECTBASEDIR
 MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
 

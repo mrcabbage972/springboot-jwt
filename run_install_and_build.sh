@@ -1,0 +1,1 @@
+bash install_and_build.sh

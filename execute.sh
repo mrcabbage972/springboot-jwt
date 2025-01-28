@@ -1,0 +1,1 @@
+#!/bin/bash\nchmod +x run.sh\n./run.sh

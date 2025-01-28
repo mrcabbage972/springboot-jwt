@@ -1,1 +1,8 @@
-#!/bin/bash\n\nchmod +x run.sh\nchmod +x run_all.sh\n./run_all.sh\nchmod +x docker_build_run.sh\ndocker build -t springboot-jwt .\ndocker run -it --rm springboot-jwt mvn test
+#!/bin/bash
+
+chmod +x run.sh
+chmod +x run_all.sh
+./run_all.sh
+chmod +x docker_build_run.sh
+docker build -t springboot-jwt .
+docker run -it --rm springboot-jwt mvn test

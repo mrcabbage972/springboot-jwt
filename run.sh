@@ -1,0 +1,1 @@
+#!/bin/bash\nchmod +x run_build.sh\n./run_build.sh

@@ -26,7 +26,7 @@
 	    <tomcat.ip>127.0.0.1</tomcat.ip>
 	    <file>readme</file>
 		<lombok.version>1.18.22</lombok.version>
-		<spring-security-oauth2.version>2.5.2</spring-security-oauth2.version>
+		<spring-security-oauth2.version>2.5.1</spring-security-oauth2.version>
 		<jackson.version>2.12.4</jackson.version>
 		<spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
 
@@ -111,6 +111,7 @@
 	         <plugin>
 		        <groupId>io.fabric8</groupId>
 		        <artifactId>docker-maven-plugin</artifactId>
+		        <version>0.33.0</version>
 		        <extensions>true</extensions>
 		        
  		        <configuration>

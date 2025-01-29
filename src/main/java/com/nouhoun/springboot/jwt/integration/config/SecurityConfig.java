@@ -11,6 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+
 
 /**
  * Created by nydiarra on 06/05/17.
@@ -61,5 +65,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf()
 				.disable();
 
+	}
+
+	@Bean
+	public JwtDecoder jwtDecoder() {
+		return NimbusJwtDecoder.withSecretKey(
+				"secret".getBytes())
+				.macAlgorithm(MacAlgorithm.HS256)
+				.build();
 	}
 }

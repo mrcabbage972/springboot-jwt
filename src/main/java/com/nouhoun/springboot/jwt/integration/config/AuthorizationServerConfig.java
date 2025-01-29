@@ -1,77 +1,64 @@
 package com.nouhoun.springboot.jwt.integration.config;
 
-import java.util.Arrays;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
+import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 
-/**
- * Created by nydiarra on 06/05/17.
- */
+import java.time.Duration;
+import java.util.Arrays;
+
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig {
 
-	@Value("${security.jwt.client-id}")
-	private String clientId;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtAccessTokenConverter accessTokenConverter;
 
-	@Value("${security.jwt.client-secret}")
-	private String clientSecret;
 
-	@Value("${security.jwt.grant-type}")
-	private String grantType;
+    public AuthorizationServerConfig(PasswordEncoder passwordEncoder, JwtAccessTokenConverter accessTokenConverter) {
+        this.passwordEncoder = passwordEncoder;
+        this.accessTokenConverter = accessTokenConverter;
+    }
 
-	@Value("${security.jwt.scope-read}")
-	private String scopeRead;
+    @Bean
+    public RegisteredClientRepository registeredClientRepository() {
+        RegisteredClient registeredClient = RegisteredClient.withId("client")
+                .clientId("client")
+                .clientSecret(passwordEncoder.encode("secret"))
+                .clientAuthenticationMethod(org.springframework.security.oauth2.server.authorization.client.RegisteredClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(org.springframework.security.oauth2.server.authorization.config.ClientSettings.builder().requireAuthorizationConsent(false).build().authorizationGrantTypes().iterator().next())
+                .scope("message.read")
+                .tokenSettings(TokenSettings.builder().accessTokenTimeToLive(Duration.ofSeconds(3600)).build())
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
+                .build();
+        return new InMemoryRegisteredClientRepository(registeredClient);
+    }
 
-	@Value("${security.jwt.scope-write}")
-	private String scopeWrite = "write";
 
-	@Value("${security.jwt.resource-ids}")
-	private String resourceIds;
 
-	@Autowired
-	private TokenStore tokenStore;
+    @Bean
+    public AuthorizationServerSettings authorizationServerSettings() {
+        return AuthorizationServerSettings.builder().build();
+    }
 
-	@Autowired
-	private JwtAccessTokenConverter accessTokenConverter;
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
-
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-	@Override
-	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
-		configurer
-		        .inMemory()
-		        .withClient(clientId)
-				.secret(passwordEncoder.encode(clientSecret))
-		        .authorizedGrantTypes(grantType)
-		        .scopes(scopeRead, scopeWrite)
-		        .resourceIds(resourceIds);
-	}
-
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
-		endpoints.tokenStore(tokenStore)
-		        .accessTokenConverter(accessTokenConverter)
-		        .tokenEnhancer(enhancerChain)
-		        .authenticationManager(authenticationManager);
-	}
 
 }

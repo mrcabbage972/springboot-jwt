@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,8 +29,8 @@ public class ResourceServerConfig {
                 .and()
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.decoder(jwtDecoder)))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/actuator/**", "/api-docs/**").permitAll()
-                        .requestMatchers("/springjwt/**").authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/me")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/**")).authenticated()
                 );
         return http.build();
     }

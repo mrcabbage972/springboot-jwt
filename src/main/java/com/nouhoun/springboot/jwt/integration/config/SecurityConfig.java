@@ -13,8 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Created by nydiarra on 06/05/17.
@@ -69,9 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public JwtDecoder jwtDecoder() {
-		return NimbusJwtDecoder.withSecretKey(
-				"secret".getBytes())
-				.macAlgorithm(MacAlgorithm.HS256)
-				.build();
+		byte[] keyBytes = "secret".getBytes();
+		SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "HS256");
+		return NimbusJwtDecoder.withSecretKey(secretKeySpec).build();
 	}
 }

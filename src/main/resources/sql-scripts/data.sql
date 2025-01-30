@@ -8,12 +8,12 @@ INSERT INTO app_user (id, first_name, last_name, password, username) VALUES (2, 
 INSERT INTO app_user (id, first_name, last_name, password, username) VALUES (3, 'User', 'User', '$2a$10$qtH0F1m488673KwgAfFXEOWxsoZSeHqqlB/8BTt3a6gsI5c2mdlfe', 'user');
 INSERT INTO app_user (id, first_name, last_name, password, username) VALUES (4, 'User1', 'User1', '$2a$10$qtH0F1m488673KwgAfFXEOWxsoZSeHqqlB/8BTt3a6gsI5c2mdlfe', 'user1');
 
-
 INSERT INTO user_role(user_id, role_id) VALUES(1,1);
 INSERT INTO user_role(user_id, role_id) VALUES(2,1);
 INSERT INTO user_role(user_id, role_id) VALUES(2,2);
 INSERT INTO user_role(user_id, role_id) VALUES(3,1);
 INSERT INTO user_role(user_id, role_id) VALUES(4,1);
+
 
 -- Populate random city table
 
@@ -25,3 +25,6 @@ INSERT INTO random_city(id, name) VALUES (5, 'New York City');
 INSERT INTO random_city(id, name) VALUES (6, 'Mopti');
 INSERT INTO random_city(id, name) VALUES (7, 'Koulikoro');
 INSERT INTO random_city(id, name) VALUES (8, 'Moscow');
+
+INSERT INTO app_user (id, first_name, last_name, password, username) VALUES (5, 'UserNew', 'UserNew', '$2a$10$qtH0F1m488673KwgAfFXEOWxsoZSeHqqlB/8BTt3a6gsI5c2mdlfe', 'usernew');
+INSERT INTO user_role(user_id, role_id) VALUES(5,1);

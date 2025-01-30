@@ -1,6 +1,5 @@
 package com.nouhoun.springboot.jwt.integration.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -13,14 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.jwk.source.ImmutableSecret;
-import com.nimbusds.jose.proc.SecurityContext;
 
 /**
  * Created by nydiarra on 06/05/17.
@@ -29,12 +22,6 @@ import com.nimbusds.jose.proc.SecurityContext;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-	@Value("${security.signing-key}")
-	private String signingKey;
-
-	@Value("${security.encoding-strength}")
-	private Integer encodingStrength;
 
 	@Value("${security.security-realm}")
 	private String securityRealm;
@@ -67,15 +54,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 	@Bean
-	public TokenStore tokenStore() throws JOSEException {
-		com.nimbusds.jose.jwk.source.JWKSource<SecurityContext> immutableSecret = new ImmutableSecret<SecurityContext>(signingKey.getBytes());
-		JwtEncoder jwtEncoder = new NimbusJwtEncoder(immutableSecret);
-		return new JwtTokenStore(jwtEncoder);
+	public TokenStore tokenStore() {
+		return new InMemoryTokenStore();
 	}
 
 	@Bean
 	@Primary //Making this primary to avoid any accidental duplication with another token service instance of the same name
-	public DefaultTokenServices tokenServices() throws JOSEException {
+	public DefaultTokenServices tokenServices() {
 		DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
 		defaultTokenServices.setTokenStore(tokenStore());
 		defaultTokenServices.setSupportRefreshToken(true);

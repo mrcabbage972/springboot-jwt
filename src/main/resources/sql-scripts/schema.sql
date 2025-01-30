@@ -13,7 +13,7 @@ CREATE TABLE role (
 CREATE TABLE users (
     id bigint NOT NULL AUTO_INCREMENT,
     email varchar(255) DEFAULT NULL,
-    enabled bit(1) DEFAULT NULL,
+    enabled BOOLEAN DEFAULT NULL,
     first_name varchar(255) DEFAULT NULL,
     last_name varchar(255) DEFAULT NULL,
     last_password_reset_date timestamp NULL,

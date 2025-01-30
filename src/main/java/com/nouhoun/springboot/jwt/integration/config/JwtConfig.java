@@ -1,4 +1,3 @@
-```java
 package com.nouhoun.springboot.jwt.integration.config;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -14,12 +13,12 @@ public class JwtConfig {
     @Value("${security.jwt.prefix:Bearer }")
     private String prefix;
 
-    @Value("${security.jwt.expiration:#{24*60*60}}")
+    @Value("${security.jwt.expiration:86400}")
     private int expiration;
 
     @Value("${security.jwt.secret:JwtSecretKey}")
     private String secret;
-    
+
     public String getUri() {
         return Uri;
     }
@@ -40,4 +39,3 @@ public class JwtConfig {
         return secret;
     }
 }
-```

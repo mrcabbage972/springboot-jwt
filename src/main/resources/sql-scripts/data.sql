@@ -6,12 +6,14 @@ INSERT INTO app_role (id, role_name, description) VALUES (2, 'ADMIN_USER', 'Admi
 INSERT INTO app_user (id, first_name, last_name, password, username) VALUES (1, 'John', 'Doe', '$2a$10$qtH0F1m488673KwgAfFXEOWxsoZSeHqqlB/8BTt3a6gsI5c2mdlfe', 'john.doe');
 INSERT INTO app_user (id, first_name, last_name, password, username) VALUES (2, 'Admin', 'Admin', '$2a$10$qtH0F1m488673KwgAfFXEOWxsoZSeHqqlB/8BTt3a6gsI5c2mdlfe', 'admin.admin');
 INSERT INTO app_user (id, first_name, last_name, password, username) VALUES (3, 'User', 'User', '$2a$10$qtH0F1m488673KwgAfFXEOWxsoZSeHqqlB/8BTt3a6gsI5c2mdlfe', 'user');
+INSERT INTO app_user (id, first_name, last_name, password, username) VALUES (4, 'User', 'User','$2a$10$qtH0F1m488673KwgAfFXEOWxsoZSeHqqlB/8BTt3a6gsI5c2mdlfe', 'user');
 
 
 INSERT INTO user_role(user_id, role_id) VALUES(1,1);
 INSERT INTO user_role(user_id, role_id) VALUES(2,1);
 INSERT INTO user_role(user_id, role_id) VALUES(2,2);
 INSERT INTO user_role(user_id, role_id) VALUES(3,1);
+INSERT INTO user_role(user_id, role_id) VALUES(4,1);
 
 -- Populate random city table
 

@@ -13,8 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+
 
 /**
  * Created by nydiarra on 06/05/17.
@@ -23,12 +23,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-	@Value("${security.signing-key}")
-	private String signingKey;
-
-	@Value("${security.encoding-strength}")
-	private Integer encodingStrength;
 
 	@Value("${security.security-realm}")
 	private String securityRealm;
@@ -58,16 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 
-	@Bean
-	public JwtAccessTokenConverter accessTokenConverter() {
-		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setSigningKey(signingKey);
-		return converter;
-	}
+
 
 	@Bean
 	public TokenStore tokenStore() {
-		return new JwtTokenStore(accessTokenConverter());
+		return new InMemoryTokenStore();
 	}
 
 	@Bean

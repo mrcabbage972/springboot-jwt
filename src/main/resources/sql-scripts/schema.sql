@@ -10,7 +10,7 @@ CREATE TABLE role (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE user (
+CREATE TABLE users (
     id bigint NOT NULL AUTO_INCREMENT,
     email varchar(255) DEFAULT NULL,
     enabled bit(1) DEFAULT NULL,
@@ -25,6 +25,6 @@ CREATE TABLE user (
 CREATE TABLE users_roles (
   user_id bigint NOT NULL,
   role_id bigint NOT NULL,
-  CONSTRAINT FK2o0jvgh89lemvvo17cbqvdxaa FOREIGN KEY (user_id) REFERENCES user (id),
+  CONSTRAINT FK2o0jvgh89lemvvo17cbqvdxaa FOREIGN KEY (user_id) REFERENCES users (id),
   CONSTRAINT FKj6m8fwv7oqv74fcehir1a9ffy FOREIGN KEY (role_id) REFERENCES role (id)
 );

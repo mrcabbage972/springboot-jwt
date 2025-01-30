@@ -1,4 +1,3 @@
-```java
 package com.nouhoun.springboot.jwt.integration.config;
 
 import com.nimbusds.jose.jwk.JWKSet;
@@ -106,10 +105,12 @@ public class WebSecurityConfig {
     }
 
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
 
 
     @Bean
@@ -118,4 +119,3 @@ public class WebSecurityConfig {
     }
 
 }
-```

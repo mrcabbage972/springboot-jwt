@@ -123,40 +123,28 @@
                 </executions>
 			</plugin>
 
-	         <plugin>
-		        <groupId>io.fabric8</groupId>
-		        <artifactId>docker-maven-plugin</artifactId>
-		        <extensions>true</extensions>
-
- 		        <configuration>
-		          <images>
-			            <image>
-			              <name>springboot-jwt</name>
-			              <alias>springboot-jwt</alias>
-			              <build>
-			                <filter>@</filter>
-			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
-			                <assembly>
-			                  <descriptorRef>artifact</descriptorRef>
-			                </assembly>
-			              </build>
-			              <run>
-			              	<namingStrategy>alias</namingStrategy>
-			                <ports>
-			                  <port>${tomcat.port}:8080</port>
-			                </ports>
-					         <wait>
-					           <http>
-					              <url>http://${tomcat.ip}:${tomcat.port}/actuator/health</url>
-					           </http>
-					           <time>90000</time>
-					         </wait>
-			              </run>
-			            </image>
-		          </images>
-		        </configuration>
-
-		      </plugin>
+			<plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.43.0</version>
+            <configuration>
+                <images>
+                    <image>
+                        <name>springboot/jwt</name>
+                        <build>
+                            <dockerFileDir>${project.basedir}/target/dockerfile/</dockerFileDir>
+                            <assembly>
+                                <descriptorRef>artifact</descriptorRef>
+                            </assembly>
+                            <tags>
+                                <tag>latest</tag>
+                                <tag>${project.version}</tag>
+                            </tags>
+                        </build>
+                    </image>
+                </images>
+            </configuration>
+        </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

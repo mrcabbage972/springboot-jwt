@@ -100,12 +100,10 @@ public class WebSecurityConfig {
     }
 
 
-
     @Bean
     public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
         return NimbusJwtDecoder.withJwkSource(jwkSource).build();
     }
-
 
 
     @Bean
@@ -114,12 +112,10 @@ public class WebSecurityConfig {
     }
 
 
-
     @Bean
     public AuthorizationServerSettings providerSettings() {
         return AuthorizationServerSettings.builder().issuer("http://auth-server:9081").build();
     }
-
 
 }
 ```

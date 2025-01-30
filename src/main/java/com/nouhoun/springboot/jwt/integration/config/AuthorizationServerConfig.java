@@ -7,13 +7,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
@@ -24,6 +24,7 @@ import java.util.UUID;
 
 @Configuration
 @EnableWebSecurity
+@EnableAuthorizationServer
 public class WebSecurityConfig {
 
     @Autowired
@@ -37,8 +38,11 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt())
+                .apply(new AuthorizationServerConfigurerAdapter())
                 .and().build();
 
     }
@@ -63,9 +67,7 @@ public class WebSecurityConfig {
         return ProviderSettings.builder().build();
     }
 
-    @Configuration
-    @EnableAuthorizationServer
-    public class AuthorizationServerConfiguration implements AuthorizationServerConfigurer {
+    private static class AuthorizationServerConfigurerAdapter extends AbstractHttpConfigurer<AuthorizationServerConfigurerAdapter, HttpSecurity> {
         @Autowired
         private RegisteredClientRepository registeredClientRepository;
 
@@ -75,17 +77,19 @@ public class WebSecurityConfig {
         @Autowired
         private ProviderSettings providerSettings;
 
+        @Override
+        public void init(HttpSecurity httpSecurity) throws Exception {
+            AuthorizationServerEndpointsConfigurer endpoints = httpSecurity.getConfigurer(AuthorizationServerEndpointsConfigurer.class);
+             endpoints.authenticationManager(authenticationManager)
+                    .clientSettings(ClientSettings.builder().build())
+                    .providerSettings(providerSettings);
+        }
 
         @Bean
         public AuthorizationServerSettings authorizationServerSettings() {
             return AuthorizationServerSettings.builder().build();
         }
 
-        @Override
-        public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-            endpoints.authenticationManager(authenticationManager)
-                    .clientSettings(ClientSettings.builder().build())
-                    .providerSettings(providerSettings);
-        }
+
     }
 }

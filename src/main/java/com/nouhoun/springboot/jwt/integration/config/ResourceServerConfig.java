@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -15,7 +16,7 @@ public class ResourceServerConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/actuator/**", "/api-docs/**").permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/actuator/**"), new AntPathRequestMatcher("/api-docs/**")).permitAll()
                 .anyRequest().authenticated()
             )
             .oauth2Client();
